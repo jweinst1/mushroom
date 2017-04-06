@@ -1,0 +1,6 @@
+[package]
+name = "mushroom"
+version = "0.1.0"
+authors = ["JoshuaWeinstein <jweinst1@berkeley.edu>"]
+
+[dependencies]
