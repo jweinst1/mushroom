@@ -8,6 +8,12 @@ pub enum MushRoom {
 
 impl MushRoom {
 	fn plus(self, other:MushRoom) -> MushRoom {
-		
+		match self {
+			MushRoom::Int(i) => match other {
+				MushRoom::Int(j) => MushRoom::Int(i + j),
+				_ => i + 0
+			},
+			_ => 0
+		}
 	}
 }

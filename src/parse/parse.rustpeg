@@ -5,13 +5,17 @@ pub Program -> ASTNode
   = a:Call* {ASTNode::Branch{key:",program".to_string(), children:a}}
 
 Call -> ASTNode
-  = "(" k:Name _ v:Value* _ ")" _ {ASTNode::Branch{key:",call".to_string(), children:vec![ k, ASTNode::Branch{key:",args".to_string(), children:v}]}}
+  = "(" k:Name _ v:Value* _ ")" {ASTNode::Branch{key:",call".to_string(), children:vec![ k, ASTNode::Branch{key:",args".to_string(), children:v}]}}
+
+List -> ASTNode
+  = "[" _ v:Value* _ "]" {ASTNode::Branch{key:",list".to_string(), children:v}}
 
 Value -> ASTNode
   = _ i:Int {i}
   / _ n:Name {n}
   / _ c:Call {c}
   / _ b:Bool {b}
+  / _ l:List {l}
 
 Name -> ASTNode
   = a:$([a-zA-Z+*/%<>=!&|-]) {ASTNode::Leaf{key:",name".to_string(), val:String::from(a)}}
