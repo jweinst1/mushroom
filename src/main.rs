@@ -1,4 +1,6 @@
 mod parse;
+mod env;
+mod mushroom;
 //example use rust-peg
 
 fn main() {

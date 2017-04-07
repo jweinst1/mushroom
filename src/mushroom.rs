@@ -1,7 +1,7 @@
 use std::fmt;
 
 
-
+#[derive(Clone)]
 pub enum MushRoom {
 	Int(i32),
 	Bool(bool),

@@ -1,10 +1,8 @@
 use std::collections::HashMap;
-use mushroom::Mushroom;
-
-
+use mushroom::MushRoom;
 
 pub struct Env {
-    vars: HashMap<String, Mushroom>,
+    vars: HashMap<String, MushRoom>,
     parent:Vec<Env>
 }
 
@@ -24,14 +22,14 @@ impl Env {
         !self.parent.is_empty()
     }
     
-    pub fn get(&self, key:String) -> Mushroom {
+    pub fn get(&self, key:String) -> MushRoom {
         match self.vars.get(&key) {
-            Some(i) => *i,
-            _ => return if self.has_parent() {self.parent[0].get(key)} else {Mushroom::Bool(false)}
+            Some(i) => i.clone(),
+            None => return if self.has_parent() {self.parent[0].get(key)} else {MushRoom::Bool(false)}
         }
     }
     
-    pub fn set(&mut self, key:String, val:Mushroom) {
+    pub fn set(&mut self, key:String, val:MushRoom) {
         self.vars.insert(key, val);
     }
     
