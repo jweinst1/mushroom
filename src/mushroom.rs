@@ -1,11 +1,10 @@
 use std::fmt;
 
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum MushRoom {
 	Int(i32),
-	Bool(bool),
-	List(Vec<MushRoom>)
+	Bool(bool)
 }
 
 impl MushRoom {
@@ -13,38 +12,29 @@ impl MushRoom {
 		match *value {
 			MushRoom::Int(i) => format!("{}", i),
 			MushRoom::Bool(b) => format!("{}", b),
-			MushRoom::List(ref l) => {
-				let mut fmt_str = "[ ".to_string();
-				for elem in l {
-					fmt_str += MushRoom::repr(elem).as_str();
-					fmt_str += " ";
-				}
-				fmt_str += "]";
-				fmt_str
-			}
+			_ => "(cmd)".to_string()
 		}
 	}
 }
 
 
-impl fmt::Debug for MushRoom {
-	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-		write!(f, "{}", MushRoom::repr(self))
-	}
-}
 
 impl fmt::Display for MushRoom {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
+    	match *self {
+			MushRoom::Int(i) => write!(f, "{}", i),
+			MushRoom::Bool(b) => write!(f, "{}", b),
+			_ => write!(f, "(cmd)")
+		}
     }
 }
 
 impl PartialEq for MushRoom {
     fn eq(&self, other: &MushRoom) -> bool {
-        MushRoom::repr(self) == MushRoom::repr(other)
+        format!("{:?}", self) == format!("{:?}", other)
     }
     
     fn ne(&self, other: &MushRoom) -> bool {
-        MushRoom::repr(self) != MushRoom::repr(other)
+        format!("{:?}", self) != format!("{:?}", other)
     }
 }
