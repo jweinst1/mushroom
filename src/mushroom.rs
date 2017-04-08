@@ -4,17 +4,16 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub enum MushRoom {
 	Int(i32),
-	Bool(bool)
+	Bool(bool),
+	Plus(Vec<MushRoom>)
 }
 
 impl MushRoom {
-    pub fn repr(value:&MushRoom) -> String {
-		match *value {
-			MushRoom::Int(i) => format!("{}", i),
-			MushRoom::Bool(b) => format!("{}", b),
-			_ => "(cmd)".to_string()
-		}
-	}
+   fn call(self) -> MushRoom {
+       match self {
+           
+       }
+   }
 }
 
 
