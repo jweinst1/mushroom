@@ -5,8 +5,7 @@ use std::fmt;
 pub enum MushRoom {
 	Int(i32),
 	Bool(bool),
-	List(Vec<MushRoom>),
-	Func(fn(Vec<MushRoom>) -> MushRoom)
+	List(Vec<MushRoom>)
 }
 
 impl MushRoom {
@@ -14,7 +13,6 @@ impl MushRoom {
 		match *value {
 			MushRoom::Int(i) => format!("{}", i),
 			MushRoom::Bool(b) => format!("{}", b),
-			MushRoom::Func(f) => format!("{:?}", f),
 			MushRoom::List(ref l) => {
 				let mut fmt_str = "[ ".to_string();
 				for elem in l {
